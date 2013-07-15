@@ -1,0 +1,29 @@
+#! /usr/local/bin/python
+#-*- coding: utf-8 -*-
+## GPS Watcher Daemon
+# Trevor Stanhope
+
+# Headers
+from gps import *
+import threading, time
+
+# Main
+class WatchGPS(threading.Thread):
+    def _init_(self):
+        threading.Thread.__init__(self)
+        self.session = gps(mode=WATCH_ENABLE)
+        self.current = None
+    def get_current(self):
+        return self.current
+    def start(self):
+        try:
+            while True:
+                self.current = session.next()
+            except StopIteration:
+                pass
+if __name__ == '__main__':
+    gpsPort = WatchGPS()
+    gpsPort.start()
+    while 1:
+        time.sleep(5)
+        print gpsPort.get_current()

@@ -1,0 +1,2 @@
+# AgriLift
+Autonomous Agriculatural Collector

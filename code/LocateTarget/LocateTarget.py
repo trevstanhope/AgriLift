@@ -1,13 +1,14 @@
+#!/usr/bin/python
 import cv2, cv
 import numpy as np
 import sys
 
 DP = 4
-MIN_DISTANCE = 10
-EDGE_THRESHOLD = 10
-CENTER_THRESHOLD = 175
-MIN_RADIUS = 2
-MAX_RADIUS = 20
+MIN_DISTANCE = 20 # minimum distance in pixels between 2 circles
+EDGE_THRESHOLD = 10 # threshold to define the edge of a circle
+CENTER_THRESHOLD = 150 # threshold to identify the center of a circle
+MIN_RADIUS = 2 # minimum radius of a circle
+MAX_RADIUS = 20 # maximum radius of a circle
 
 if len(sys.argv)>1:
     filename = sys.argv[1]
@@ -18,7 +19,6 @@ img_gray = cv2.imread(filename,cv2.CV_LOAD_IMAGE_GRAYSCALE)
 
 if img_gray == None:
   print "cannot open ",filename
-
 else:
   img = cv2.GaussianBlur(img_gray, (0,0), 3)
   aimg = cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)
@@ -31,12 +31,12 @@ try:
     x = target[0]
     y = target[1]
     r = target[2]
-    cv2.circle(aimg,(x,y,r,(0,255,0),1) 
+    cv2.circle(aimg,(x,y),r,(0,255,0),1) 
     cv2.circle(aimg,(x,y),2,(0,0,255),3)   
 except AttributeError:
   print('None detected')
 
+# Display detected objects
 cv2.imshow('blurred image',aimg)
-cv2.imshow('detected circles',cimg)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
