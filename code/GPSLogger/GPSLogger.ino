@@ -23,7 +23,7 @@ void loop() {
   char temp = 0;
   String dataString = "";
   File dataFile = SD.open("datalog.txt", FILE_WRITE);
-  if (dataFile) {
+  if (true) {
     while(gps.available()) {
       temp = gps.read();
       dataString += String(temp);

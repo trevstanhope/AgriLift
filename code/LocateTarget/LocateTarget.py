@@ -37,6 +37,7 @@ except AttributeError:
   print('None detected')
 
 # Display detected objects
+cv2.imshow('threshold image', cimg)
 cv2.imshow('blurred image',aimg)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
